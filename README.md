@@ -1,6 +1,6 @@
 # Introduction
 
-This project is now a reboot of thr the original Cloudless pipeline, but aims to be more geberic from annotation to prediction. 
+This project is a reboot of the the original Cloudless pipeline, but aims to be more generic from annotation to prediction. 
 
 
 This project provides a classifier for detecting clouds in satellite remote sensing data using deep learning. Startups like [Planet Labs](https://www.planet.com/) have launched fleets of nanosats to image much of the earth daily; detecting clouds in these images to ignore or eliminate them is an important pre-processing step to doing interesting work with nanosat imagery. For example, if we are getting daily orbital photos of a location, we might want to detect changes over time, such as for automatically detecting deforestation, counting cars in parking lots, etc. Being able to first detect and eliminate clouds (which change often and could lead to false positives), is therefore important.
@@ -49,7 +49,8 @@ Setting it up:
 If using Mac
 * brew install gdal
 
-If using Ubuntu
+If using Ubuntu (Credit - https://mothergeo-py.readthedocs.io/en/latest/development/how-to/gdal-ubuntu-pkg.html)
+
 ```
 #!/usr/bin/env bash
 
@@ -62,17 +63,20 @@ export C_INCLUDE_PATH=/usr/include/gdal
 pip install GDAL
 ```
 
-* Install virtualenv and virtualenvwrapper: https://jamie.curle.io/posts/installing-pip-virtualenv-and-virtualenvwrapper-on-os-x/
-* mkvirtualenv annotate-django
+* Install virtualenv and virtualenvwrapper
+* virtualenv  annotate-django
 * cd src/annotate
 * pip install -r requirements.txt
 * ./manage.py migrate
+
+Below step is optional
+
 * echo 'PLANET_KEY="SECRET PLANET LABS KEY"' >> $VIRTUAL_ENV/bin/postactivate
 
 Each time you work with the annotation tool you will ned to re-activate its virtualenv setup:
 
 ```
-workon annotate-django
+source annotate-django/bin/activate
 ```
 
 When finished working run:
