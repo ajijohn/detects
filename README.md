@@ -45,7 +45,23 @@ Documentation sections:
 The annotation tool makes it possible to label Planet Labs data to feed into the neural network. It's code lives in [src/annotate](src/annotate).
 
 Setting it up:
+
+If using Mac
 * brew install gdal
+
+If using Ubuntu
+```
+#!/usr/bin/env bash
+
+sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
+sudo apt-get update
+sudo apt-get install gdal-bin
+sudo apt-get install libgdal-dev
+export CPLUS_INCLUDE_PATH=/usr/include/gdal
+export C_INCLUDE_PATH=/usr/include/gdal
+pip install GDAL
+```
+
 * Install virtualenv and virtualenvwrapper: https://jamie.curle.io/posts/installing-pip-virtualenv-and-virtualenvwrapper-on-os-x/
 * mkvirtualenv annotate-django
 * cd src/annotate
