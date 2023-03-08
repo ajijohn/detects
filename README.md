@@ -1,6 +1,6 @@
 # Introduction
 
-This project is now areboot of thr the original Cloudless pipeline, but aims to be more geberic from annotation to prediction. 
+This project is now a reboot of thr the original Cloudless pipeline, but aims to be more geberic from annotation to prediction. 
 
 
 This project provides a classifier for detecting clouds in satellite remote sensing data using deep learning. Startups like [Planet Labs](https://www.planet.com/) have launched fleets of nanosats to image much of the earth daily; detecting clouds in these images to ignore or eliminate them is an important pre-processing step to doing interesting work with nanosat imagery. For example, if we are getting daily orbital photos of a location, we might want to detect changes over time, such as for automatically detecting deforestation, counting cars in parking lots, etc. Being able to first detect and eliminate clouds (which change often and could lead to false positives), is therefore important.
