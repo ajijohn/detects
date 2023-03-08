@@ -25,13 +25,13 @@ def import_images(dirname, chunk_size=256):
 
     imported_ids = []
     for f in glob.glob(os.path.join(dirname, '*.tif')):
-        print 'Processing %s' % f
+        print('Processing %s' % f)
         for chunk_f in chunk(f, chunk_size):
             chunk_img = pImage.open(chunk_f)
             converted_f = convert(chunk_img, chunk_f)
             os.remove(chunk_f)
             if incomplete_image(chunk_img):
-                print '\tImage has blackfill, ignoring %s' % chunk_f
+                print('\tImage has blackfill, ignoring %s' % chunk_f)
                 os.remove(converted_f)
                 continue
             new_f = os.path.join(static_dir, os.path.basename(converted_f))
@@ -100,4 +100,4 @@ def run(*args):
     )
     args = parser.parse_args(args)
     ids = import_images(args.dirname, args.chunk_size)
-    print '%s image chunks added to database' % len(ids)
+    print('%s image chunks added to database' % len(ids))

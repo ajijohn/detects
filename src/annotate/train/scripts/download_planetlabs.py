@@ -39,7 +39,7 @@ def download(lat, lng, buff_meters, download_dir='/tmp', image_type='planetlabs'
     params = {"intersects": buff.ExportToWkt()}
     while next_url != None:
         next_url = download_results(next_url, params, downloaded_scenes, download_dir, image_type)
-        print "\nWorking with next page of results: %s" % next_url
+        print("\nWorking with next page of results: %s" % next_url)
 
     return downloaded_scenes
 
@@ -63,7 +63,7 @@ def download_results(results_url, params, downloaded_scenes, download_dir, image
             img_url = scene_data["properties"]["data"]["products"]["analytic"]["full"]
 
         if does_download_exist(img_url, download_dir) == True:
-            print '\nAlready downloaded %s' % img_url
+            print('\nAlready downloaded %s' % img_url)
             continue
 
         # Sometimes the downloaded image can be corrupted - keep trying until we have
@@ -71,7 +71,7 @@ def download_results(results_url, params, downloaded_scenes, download_dir, image
         finished = False
         while not finished:
             try:
-                print '\nDownloading image from %s' % img_url
+                print('\nDownloading image from %s' % img_url)
                 image_filename = download_image(img_url, download_dir)
 
                 if image_type == 'rapideye':
@@ -80,7 +80,7 @@ def download_results(results_url, params, downloaded_scenes, download_dir, image
 
                 finished = True
             except:
-                print "Unexpected error dealing with image:", sys.exc_info()[0]
+                print("Unexpected error dealing with image:", sys.exc_info()[0])
 
         downloaded_scenes.append(image_filename)
 
@@ -106,7 +106,7 @@ def from_analytic_to_visual(analytic_filename, download_dir='/tmp'):
 
     base = os.path.basename(os.path.splitext(analytic_filename)[0])
 
-    print "Extracting RGB bands..."
+    print("Extracting RGB bands...")
     translate_filename = os.path.join(
         download_dir, '%s-rgb.tif' % (base)
     )
@@ -122,7 +122,7 @@ def from_analytic_to_visual(analytic_filename, download_dir='/tmp'):
     #     translate_filename, proj_filename
     # ))
 
-    print "Converting to visual color scheme..."
+    print("Converting to visual color scheme...")
     bright_filename = os.path.join(
         download_dir, '%s-bright.tif' % base
     )
@@ -130,11 +130,11 @@ def from_analytic_to_visual(analytic_filename, download_dir='/tmp'):
         translate_filename, bright_filename
     ))
 
-    print "Fixing alpha channel..."
+    print("Fixing alpha channel...")
     fix_alpha_channel(bright_filename)
 
     # Cleanup
-    print "Cleaning up..."
+    print("Cleaning up...")
     shutil.move(bright_filename, analytic_filename)
     os.remove(translate_filename)
     os.remove(os.path.join(download_dir, '%s-rgb.tif.aux.xml' % (base)))
@@ -200,7 +200,7 @@ def download_image(url, download_dir='/tmp'):
     """
     local_filename = get_download_filename(url, download_dir)
 
-    print "Saving raw downloaded image to %s..." % local_filename
+    print("Saving raw downloaded image to %s..." % local_filename)
     r = requests.get(url, stream=True, auth=(PLANET_KEY, ''))
     with open(local_filename, 'wb') as f:
         for chunk in r.iter_content(chunk_size=1024):
@@ -247,10 +247,10 @@ if __name__ == '__main__':
     image_type = args.image_type
     if image_type == 'both':
         planetlab_scenes = download(args.lat, args.lng, args.buffer, args.dir, 'planetlabs')
-        print '%s downloaded PlanetLab scenes' % len(planetlab_scenes)
+        print('%s downloaded PlanetLab scenes' % len(planetlab_scenes))
 
         rapideye_scenes = download(args.lat, args.lng, args.buffer, args.dir, 'rapideye')
-        print '%s downloaded RapidEye scenes' % len(rapideye_scenes)
+        print('%s downloaded RapidEye scenes' % len(rapideye_scenes))
     else:
         downloaded_scenes = download(args.lat, args.lng, args.buffer, args.dir, args.image_type)
-        print '%s downloaded %s scenes' % (len(downloaded_scenes), args.image_type)
+        print('%s downloaded %s scenes' % (len(downloaded_scenes), args.image_type))

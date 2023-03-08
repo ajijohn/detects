@@ -37,4 +37,4 @@ def run(*args):
     parser.add_argument('dirname', help='Destination directory')
     args = parser.parse_args(args)
     num_exported = export(args.dirname)
-    print '%s annotated images exported' % num_exported
+    print('%s annotated images exported' % num_exported)
