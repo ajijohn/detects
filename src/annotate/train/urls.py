@@ -1,8 +1,8 @@
-from django.conf.urls import url
-
+#from django.conf.urls import url
+from django.urls import path,re_path
 from . import views
 
 urlpatterns = [
-    url('api/getImage', views.getImage),
-    url('annotate', views.annotate)
+    path('api/getImage', views.getImage),
+    path('annotate', views.annotate)
 ]

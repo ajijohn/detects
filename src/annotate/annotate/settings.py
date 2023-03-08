@@ -25,7 +25,7 @@ SECRET_KEY = '8ef-d6_m68+txvg5bfyps55hr+btsp7f$f!5n4l%c1g^_w#8au'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1']
 
 
 # Application definition
@@ -41,16 +41,11 @@ INSTALLED_APPS = (
     'train'
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-)
+MIDDLEWARE = [
+ 'django.contrib.sessions.middleware.SessionMiddleware',
+'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware'
+]
 
 ROOT_URLCONF = 'annotate.urls'
 
